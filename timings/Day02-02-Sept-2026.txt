@@ -1,0 +1,7 @@
+~
+What I did Today
+
+3 Hours - Attended morning classes
+2:00 Hours - Watched the previous batch video about connecting EC2 instance  to GitHub 
+2:00 hours - Practice creating and connecting EC2 instance to github.
+1:30 hours - Learned Jump Server (Baston Host) and Practice Linux Commands.
