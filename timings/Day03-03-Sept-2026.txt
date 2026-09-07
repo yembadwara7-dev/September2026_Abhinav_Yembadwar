@@ -1,0 +1,5 @@
+i
+4:00 Hours - Attended morning lecture
+2:00 Hours - Practiced the linux commands which we learned on today morning lecture 
+1:00 Hours -  Completed todays task which is to learned about Relative path and Absolute path.
+1:00 Hours - Study of hardlink and softlink which is important for interview perspective.
