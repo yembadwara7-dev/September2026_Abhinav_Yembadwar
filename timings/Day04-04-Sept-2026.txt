@@ -1,0 +1,6 @@
+What I did today
+
+4:00 hours - Attended Morning Lecture
+1:00 hour - Study of topics Idp provider, password manager, sed vs awk, Umask
+1:00 hours - Practice linux commands what we learned till today.
+1:30 hour - Installed Ubuntu for Linux practice
