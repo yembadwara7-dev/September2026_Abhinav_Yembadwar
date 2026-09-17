@@ -1,0 +1,4 @@
+3:00 hours :- I have attended morning session of kubernetes class 2
+2:00 hours :- I revised lecture and learned about nodes, Pods
+1:30 hours :- I read the notes about the kubernetes 
+00:30 minutes :- I haveattend the evening session
