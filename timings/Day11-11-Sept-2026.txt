@@ -1,0 +1,5 @@
+3:00 hours :- Attend morning session of Kubernetes
+2:00 hours :- Revice the topic of Kubernetes
+1:30 hours :- Write the code for the git daily task
+00:30 hours :- attend evening session 
+1:00 hours :- attend evening guest session of placement student
