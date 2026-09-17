@@ -1,0 +1,4 @@
+3:00 hours :- I have attended morning session learned the how to create cluster
+2:30 hours :- I have revised the mornings session and create EKS cluster
+2:00 hours :- I have practice the kubernetes cluster and read notes of that
+1:00 hours :- I have attend the evening session in that i have explained how to create cluster:w
