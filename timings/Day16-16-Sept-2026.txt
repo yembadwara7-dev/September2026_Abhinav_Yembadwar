@@ -1,0 +1,4 @@
+3:30 hours :- Attended morning session
+2:00 hours :- Learned the concepts Affinity, Pod Affinity, Node Affinity
+2:30 hours :- watched the previous batch lecture
+   
