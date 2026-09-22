@@ -1,0 +1,145 @@
+	Day 16 - Advanced CloudFormation & Multi-Region Deployments
+
+	## Ansible - Create and start EC2 Instances
+	
+	- name: Create EC2 instances
+	  hosts: localhost
+	  become: yes
+	  tasks:
+	     - name: Launch EC2 instance in us-east-1
+	       ec2_instance:
+		name: pathnex-ec2-us-east-1
+		key_name: pathnex-key
+		region: us-east-1
+		instance_type: t2.micro
+		image: ami-0abcd1234abcd1234
+		wait: yes
+	     - name: Launch EC2 instance in us-west-1
+	       ec2_instance:
+		name: pathnex-ec2-us-west-1
+		key_name: pathnex-key
+		region: us-west-1
+		instance_type: t2.micro
+		image: ami-0abcd1234abcd1234
+		wait: yes
+
+	## Terraform - Multi-Region VPC with EC2
+	resource "aws_vpc" "us_east_vpc" {
+	   cidr_block = "10.0.0.0/16"
+	   region     = "us-east-1"
+	  }
+
+	resource "aws_vpc" "us_west_vpc" {
+	   cidr_block = "10.0.0.0/16"
+	   region     = "us-west-1"
+	  }
+
+	resource "aws_instance" "pathnex_ec2_us_east" {
+	   ami           = "ami-0abcd1234abcd1234"
+	   instance_type = "t2.micro"
+	   region        = "us-east-1"
+	  }
+
+	resource "aws_instance" "pathnex_ec2_us_west" {
+	   ami           = "ami-0abcd1234abcd1234"
+	   instance_type = "t2.micro"
+	   region        = "us-west-1"
+	  }
+
+	## Kubernetes - Multi-Cluster Deployment with federation
+	apiVersion: apps/v1
+	kind: Deployment
+	metadata:
+	   name: pathnex-deployment
+	   labels:
+	     app: pathnex-app
+	spec:
+	  replicas:2
+	  selector:
+	    matchlabels:
+		app: pathnex-app
+	spec:
+	  replicas:2
+	  metadata:
+	    labels:
+		app: pathnex-app
+	     spec:
+		containers:
+		   - name: nginx
+		     image: nginx
+	  	     ports:
+		       - containerPort: 80
+	---
+
+	apiVersion: v1
+	kind: Service
+	metadata:
+	  name: pathnex-service
+	spec: 
+	  selector:
+	    app: pathnex-app
+	  ports:
+	   - protocol: TCP
+	     port: 80
+	
+	## Jenkinsfile - Deploy to Multi-Cluster Environments
+	pipeline {
+	    agent any
+	    stages {
+		stage('Build') {
+		  steps {
+		     echo 'Building Docker image...'
+		     docker.build('pathnex-web-app')
+		}
+	}
+	stage('Deploy to Kubernetes') {
+	   steps {
+		script {
+		     if(env.CLUSTER == 'us-east') {
+			sh 'kubctl --context=us-east apply -f kubernetes/deployment.yaml'
+		} else {
+			sh 'kubctl --context=us-west apply -f kubernetes/deployment.yaml' 
+		}
+	      }
+	    }
+	  }
+	}
+     }
+
+	## GitLab CI/CD - Multi-Region Deployment with Kubernetes
+	stages:
+	   - build
+	   - push
+	   - deploy
+	
+	build:
+	   stage: push
+	   script:
+	     - docker build -t pathnex-web-app .
+	
+	push:
+	   stage: deploy
+	   script:
+	     - |
+		if [ "$CI_COMMIT_REF_NAME" == "main" ]; then
+		  kubectl --context=us-east apply -f Kubernetes/prod-deployment.yaml
+	else
+	   kubectl --context=us-west apply -f Kubernetes/dev-deployment.yaml
+	fi
+	
+	
+	
+	
+	## Docker
+	# Shell Script Execution
+	#!/bin/bash
+	echo "Hello Pathnex"
+
+	
+	# Docker File
+	
+	FROM ubuntu
+	WORKDIR /opt/pathnex/scripts
+	COPY start.sh /opt/pathnex/scripts
+	RUN chmod +x /opt/pathnex/scripts/start.sh
+	CMD ["/opt/pathnex/scripts/stat.sh"]
